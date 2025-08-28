@@ -1,23 +1,39 @@
 import { useEffect, useState, type ReactNode } from "react";
 import { AuthContext } from "./AuthContext";
+import { jwtDecode } from "jwt-decode";
 
 function AuthProvider({ children }: { children: ReactNode }) {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(() => {
     const token = localStorage.getItem("access_token");
-    setIsAuthenticated(!!token);
+    if (!token) {
+      setIsAuthenticated(false);
+      return;
+    }
+
+    try {
+      const decoded = jwtDecode<{ exp: number }>(token);
+      const now = Date.now() / 1000;
+      if (decoded.exp > now) {
+        setIsAuthenticated(true);
+      } else {
+        localStorage.removeItem("access_token");
+        setIsAuthenticated(false);
+      }
+    } catch {
+      localStorage.removeItem("access_token");
+      setIsAuthenticated(false);
+    }
   }, []);
 
-  const login = (access: string, refresh: string) => {
+  const login = (access: string) => {
     localStorage.setItem("access_token", access);
-    localStorage.setItem("refresh_token", refresh);
     setIsAuthenticated(true);
   };
 
   const logout = () => {
     localStorage.removeItem("access_token");
-    localStorage.removeItem("refresh_token");
     setIsAuthenticated(false);
   };
 
