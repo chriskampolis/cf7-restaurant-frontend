@@ -166,9 +166,9 @@ export default function UsersPage() {
       </form>
 
       {/* Table */}
-      <table className="min-w-full border">
+      <table className="min-w-full border border-gray600">
         <thead>
-          <tr className="bg-gray-200">
+          <tr className="bg-gray-200 text-left">
             <th className="px-4 py-2">Username</th>
             <th className="px-4 py-2">Email</th>
             <th className="px-4 py-2">First Name</th>

@@ -89,7 +89,7 @@ export default function MenuItemsPage() {
       <h1 className="text-xl font-bold mb-4">Menu Items (Manager CRUD)</h1>
 
       {/* Create form */}
-      <form onSubmit={handleCreate} className="mb-6 flex gap-4">
+      <form onSubmit={handleCreate} className="mb-6 flex flex-wrap gap-4">
         <input
           type="text"
           placeholder="Name"
@@ -127,9 +127,9 @@ export default function MenuItemsPage() {
       </form>
 
       {/* Table */}
-      <table className="min-w-full border">
+      <table className="min-w-full border border-gray-600">
         <thead>
-          <tr className="bg-gray-200">
+          <tr className="bg-gray-200 text-left">
             <th className="px-4 py-2">Name</th>
             <th className="px-4 py-2">Price</th>
             <th className="px-4 py-2">Availability</th>
@@ -165,7 +165,7 @@ export default function MenuItemsPage() {
                     className="border p-1 rounded"
                   />
                 ) : (
-                  `€${item.price}`
+                  `${item.price}€`
                 )}
               </td>
               <td className="px-4 py-2">
