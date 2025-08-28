@@ -13,7 +13,7 @@ export default function UsersPage() {
     first_name: "",
     last_name: "",
     email: "",
-    is_staff: false,
+    is_staff: true,
     is_active: true,
     role: "employee" as UserRole,    
   });
@@ -45,7 +45,7 @@ export default function UsersPage() {
         first_name: "",
         last_name: "",
         role: "employee",
-        is_staff: false,
+        is_staff: true,
         is_active: true,        
       });
     } catch (err) {
@@ -81,7 +81,7 @@ export default function UsersPage() {
   // Save edited user
   const handleSave = async (id: number) => {
     try {
-      const res = await api.put(`/api/users/${id}/`, editValues);
+      const res = await api.patch(`/api/users/${id}/`, editValues);
       setUsers((prev) =>
         prev.map((u) => (u.id === id ? res.data : u))
       );
@@ -174,7 +174,7 @@ export default function UsersPage() {
             <th className="px-4 py-2">First Name</th>
             <th className="px-4 py-2">Last Name</th>
             <th className="px-4 py-2">Role</th>
-            <th className="px-4 py-2">Is Staff</th>
+            {/* <th className="px-4 py-2">Is Staff</th> */}
             <th className="px-4 py-2">Is Active</th>
             <th className="px-4 py-2">Actions</th>
           </tr>
@@ -254,11 +254,43 @@ export default function UsersPage() {
                   user.role
                 )}
               </td>
+              {/* <td className="px-4 py-2">
+                {editingId === user.id ? (
+                  <select
+                    value={editValues.is_staff ?? user.is_staff ? "true" : "false"}
+                    onChange={(e) =>
+                      setEditValues({
+                        ...editValues,
+                        is_staff: e.target.value === "true",
+                      })
+                    }
+                    className="border p-1 rounded"
+                  >
+                    <option value="true">Yes</option>
+                    <option value="false">No</option>
+                  </select>
+                ) : (
+                  user.is_staff ? "Yes" : "No"
+                )}
+              </td> */}
               <td className="px-4 py-2">
-                {user.is_staff ? "Yes" : "No"}
-              </td>
-              <td className="px-4 py-2">
-                {user.is_active ? "Yes" : "No"}
+                {editingId === user.id ? (
+                  <select
+                    value={editValues.is_active ?? user.is_active ? "true" : "false"}
+                    onChange={(e) =>
+                      setEditValues({
+                        ...editValues,
+                        is_active: e.target.value === "true",
+                      })
+                    }
+                    className="border p-1 rounded"
+                  >
+                    <option value="true">Yes</option>
+                    <option value="false">No</option>
+                  </select>
+                ) : (
+                  user.is_active ? "Yes" : "No"
+                )}
               </td>
               <td className="px-4 py-2 flex gap-2">
                 {editingId === user.id ? (
