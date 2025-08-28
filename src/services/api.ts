@@ -11,9 +11,17 @@ api.interceptors.request.use((config) => {
   }
   return config;
 },
-//   (error)=> {
-//     return Promise.reject(error)
-//   }
+
+);
+api.interceptors.response.use(
+  (res) => res,
+  (err) => {
+    if (err.response?.status === 401) {
+      localStorage.removeItem("access_token");
+      window.location.href = "/login"; // redirect immediately
+    }
+    return Promise.reject(err);
+  }
 );
 
 export default api;
