@@ -70,7 +70,7 @@ export default function MenuItemsPage() {
   // Save edited item
   const handleSave = async (id: number) => {
     try {
-      const res = await api.put(`/api/menu-items/${id}/`, editValues);
+      const res = await api.patch(`/api/menu-items/${id}/`, editValues);
       setMenuItems((prev) =>
         prev.map((item) => (item.id === id ? res.data : item))
       );
@@ -120,7 +120,7 @@ export default function MenuItemsPage() {
         />
         <button
           type="submit"
-          className="bg-green-600 text-white px-4 py-2 rounded"
+          className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-500"
         >
           Add Item
         </button>
