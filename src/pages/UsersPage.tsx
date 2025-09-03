@@ -93,6 +93,15 @@ export default function UsersPage() {
     }
   };
 
+  // Cancel editing (restore original values)
+  const handleCancel = (id: number) => {
+    const original = users.find((user) => user.id === id);
+    if (original) {
+      setEditValues({ ...original });
+    }
+    setEditingId(null); // exit edit mode
+  };
+
   const handleDelete = async (id: number) => {
     if (!confirm("Are you sure you want to delete this user?")) return;
     try {
@@ -159,7 +168,7 @@ export default function UsersPage() {
         </select>
         <button
           type="submit"
-          className="bg-green-600 text-white px-4 py-2 rounded"
+          className="bg-green-600 text-white px-4 py-2 rounded cursor-pointer"
         >
           Add User
         </button>
@@ -294,26 +303,36 @@ export default function UsersPage() {
               </td>
               <td className="px-4 py-2 flex gap-2">
                 {editingId === user.id ? (
-                  <button
-                    onClick={() => handleSave(user.id)}
-                    className="bg-green-600 text-white px-2 py-1 rounded hover:bg-green-500"
-                  >
-                    Save
-                  </button>
+                  <>
+                    <button
+                      onClick={() => handleSave(user.id)}
+                      className="bg-green-600 text-white px-2 py-1 rounded hover:bg-green-500 cursor-pointer"
+                    >
+                      Save
+                    </button>
+                    <button
+                      onClick={() => handleCancel(user.id)}
+                      className="bg-gray-500 text-white px-2 py-1 rounded hover:bg-gray-400 cursor-pointer"
+                    >
+                      Cancel
+                    </button>
+                  </>
                 ) : (
-                  <button
-                    onClick={() => handleEdit(user)}
-                    className="bg-blue-600 text-white px-2 py-1 rounded hover:bg-blue-500"
-                  >
-                    Edit
-                  </button>
+                  <>
+                    <button
+                      onClick={() => handleEdit(user)}
+                      className="bg-blue-600 text-white px-2 py-1 rounded hover:bg-blue-500 cursor-pointer"
+                    >
+                      Edit
+                    </button>
+                    <button
+                      onClick={() => handleDelete(user.id)}
+                      className="bg-red-600 text-white px-2 py-1 rounded hover:bg-red-500 cursor-pointer"
+                    >
+                      Delete
+                    </button>
+                  </>
                 )}
-                <button
-                  onClick={() => handleDelete(user.id)}
-                  className="bg-red-600 text-white px-2 py-1 rounded hover:bg-red-500"
-                >
-                  Delete
-                </button>
               </td>
             </tr>
           ))}
