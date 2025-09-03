@@ -55,44 +55,47 @@ function Header2() {
   }, []);
 
   return (
-    <header className="flex justify-between items-center px-6 py-3 bg-gray-800 text-white">
-      {/* Left side: Logo */}
+    <header className="fixed top-0 left-0 w-full z-50 h-20 flex justify-between items-center px-6 py-3 bg-gray-800 text-white shadow">
+      {/* Left side */}
       <Link to="/" className="text-lg font-bold">
         Restaurant App
       </Link>
 
       {/* Right side */}
-      <div className="relative" ref={dropdownRef}>
+      <div ref={dropdownRef}>
         {auth.isAuthenticated ? (
           <>
             <button
-              className="px-4 py-2 bg-gray-700 rounded"
+              className="px-4 py-2 bg-gray-700 rounded cursor-pointer"
               onClick={() => setOpen((prev) => !prev)}
             >
               Welcome, {username ?? "..."}
             </button>
 
             {open && (
-              <div className="absolute right-0 mt-4 w-48 bg-gray-800 text-white shadow-lg z-50">
-                <Link to="/" className="block px-4 py-2 hover:bg-gray-200">
+              <div className="absolute right-0 top-full w-48 bg-gray-800 text-white shadow-lg z-50">
+                <Link to="/" className="block px-4 py-2 hover:bg-gray-500">
                   Homepage
                 </Link>
-                <Link to="/orders" className="block px-4 py-2 hover:bg-gray-200">
+                <Link to="/orders" className="block px-4 py-2 hover:bg-gray-500">
                   Orders
                 </Link>
                 {isManager && (
                   <>
-                    <Link to="/users" className="block px-4 py-2 hover:bg-gray-200">
+                    <Link to="/users" className="block px-4 py-2 hover:bg-gray-500">
                       Users
                     </Link>
-                    <Link to="/menu" className="block px-4 py-2 hover:bg-gray-200">
+                    <Link to="/menu" className="block px-4 py-2 hover:bg-gray-500">
                       Menu Items
+                    </Link>
+                    <Link to="/completed-orders" className="block px-4 py-2 hover:bg-gray-500">
+                      Completed Orders
                     </Link>
                   </>
                 )}
                 <button
                   onClick={handleLogout}
-                  className="w-full text-left px-4 py-2 hover:bg-red-100 text-red-600"
+                  className="w-full text-left px-4 py-2 hover:bg-gray-500 cursor-pointer"
                 >
                   Logout
                 </button>
