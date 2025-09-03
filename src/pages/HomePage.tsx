@@ -4,26 +4,43 @@ import type { MenuItem } from "../types";
 import MenuViewCard from "../components/MenuViewCard";
 
 function HomePage() {
-  const [menu, setMenu] = useState<MenuItem[]>([]);
+  const [menuItems, setMenuItems] = useState<MenuItem[]>([]);
 
   useEffect(() => {
-    api.get("/api/menu-items/").then((res) => setMenu(res.data));
+    api.get("/api/menu-items/").then((res) => setMenuItems(res.data));
   }, []);
+
+  // Group items by category
+  const groupedItems = menuItems.reduce((acc, item) => {
+    acc[item.category] = acc[item.category] || [];
+    acc[item.category].push(item);
+    return acc;
+  }, {} as Record<string, MenuItem[]>);
+
+  const categoryLabels: Record<string, string> = {
+    APPETIZER: "Appetizers",
+    MAIN: "Main Dishes",
+    DESSERT: "Desserts",
+    DRINK: "Drinks",
+  };
+
 
   return (
     <div className="p-6">
-      <div className="flex justify-between items-center mb-6">
-        <h1 className="text-xl font-bold">Menu</h1>
-      </div>
+      <h1 className="text-2xl font-bold mb-6 text-center">Our Menu</h1>
 
-      <div className="grid gap-4">
-        {menu.map((item) => (
-          <MenuViewCard
-            key={item.id}
-            item={item}
-          />
-        ))}
-      </div>
+      {Object.entries(groupedItems).map(([category, items]) => (
+        <div key={category} className="mb-8">
+          <h2 className="text-xl font-semibold mb-4 pb-2">
+            {categoryLabels[category] || category}
+          </h2>
+          <div className="space-y-4">
+            {items.map((item) => (
+              <MenuViewCard key={item.id} item={item} />
+            ))}
+          </div>
+        </div>
+      ))}
     </div>
   );
 }
