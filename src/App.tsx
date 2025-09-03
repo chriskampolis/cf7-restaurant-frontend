@@ -8,6 +8,7 @@ import AuthProvider from './context/AuthProvider';
 import Layout from './components/Layout';
 import MenuItemsPage from './pages/MenuItemsPage';
 import UsersPage from './pages/UsersPage';
+import CompletedOrdersPage from './pages/CompletedOrdersPage';
 
 
 function App() {
@@ -19,13 +20,35 @@ function App() {
             <Route element={<Layout/>} >
               <Route path="/" element={<HomePage />} />
               <Route path="/login" element={<LoginPage />} />
-              <Route path="/menu" element={<MenuItemsPage />} />
-              <Route path="/users" element={<UsersPage />} />
               <Route 
                 path="/orders"
                 element={
                   <ProtectedRoute>
                     <OrderPage />
+                  </ProtectedRoute>
+                }
+              />
+              <Route 
+                path="/completed-orders"
+                element={
+                  <ProtectedRoute>
+                    <CompletedOrdersPage />
+                  </ProtectedRoute>
+                }
+              />
+              <Route 
+                path="/menu"
+                element={
+                  <ProtectedRoute>
+                    <MenuItemsPage />
+                  </ProtectedRoute>
+                }
+              />
+              <Route 
+                path="/users"
+                element={
+                  <ProtectedRoute>
+                    <UsersPage />
                   </ProtectedRoute>
                 }
               />
