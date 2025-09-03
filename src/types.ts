@@ -3,6 +3,7 @@ export interface MenuItem {
   name: string;
   price: string;
   availability: number;
+  category: string;
 }
 
 export interface OrderItem {
@@ -35,6 +36,6 @@ export interface User {
   is_superuser: boolean;
   is_staff: boolean;
   is_active: boolean;
-  password: string; // only for create/update
+  password: string; // only for create
   is_manager?: () => boolean; // helper function
 }
