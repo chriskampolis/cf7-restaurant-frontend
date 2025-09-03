@@ -5,11 +5,13 @@ import Header2 from "./Header2.tsx";
 const Layout = () => {
   return (
     <>
-      <Header2 />
-      <div className="container mx-auto min-h-[95vh] pt-24">
-        <Outlet />
+      <div className="flex flex-col min-h-screen">
+        <Header2 />
+        <main className="flex-grow container mx-auto pt-24">
+          <Outlet />
+        </main>
+        <Footer />
       </div>
-      <Footer />
     </>
   );
 };
