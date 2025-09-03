@@ -7,6 +7,10 @@ function ProtectedRoute({ children }: { children: React.ReactNode }) {
 
   if (!auth) return null; // context not loaded
 
+  if (auth.loading) {
+    return <div>Loading...</div>;
+  }
+
   return auth.isAuthenticated ? children : <Navigate to="/login" replace />;
 }
 
