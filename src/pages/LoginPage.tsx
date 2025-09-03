@@ -30,10 +30,10 @@ function LoginPage() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen bg-gray-100">
+    <div className="flex flex-col py-12 items-center bg-white">
       <form
         onSubmit={handleSubmit}
-        className="bg-white p-6 rounded-lg shadow-md w-80"
+        className="bg-gray-100 p-6 rounded-lg shadow-md w-80"
       >
         <h2 className="text-xl font-bold mb-4">Login</h2>
 
@@ -57,7 +57,7 @@ function LoginPage() {
 
         <button
           type="submit"
-          className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition"
+          className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition cursor-pointer"
         >
           Login
         </button>
