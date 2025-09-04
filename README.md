@@ -17,6 +17,7 @@ It communicates with the backend API to display menu items, manage orders, and a
 
 ## 📝 Order Page
 
+**Placing and Managing Orders**
 - **Table Selection & Status** – Each order is tied to a table and marked as either **New** or **In Progress**.  
 - **Submitting an Order** – The first submission for a table creates the order and sets it to **In Progress**.  
 - **Adding More Items** – If the table requests more dishes, the employee simply adjusts the quantities or adds new items, then submits again.  
